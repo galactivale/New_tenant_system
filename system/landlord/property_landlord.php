@@ -63,77 +63,7 @@
             </div>
             <!--Property listing card-->
 
-            <div class="property-listing">
-                <div class="image-box">
-                    <img src="assets/images/Tenant.jpg" alt="">
-                </div>
-                <div class="column">
-                    <h2> Kignston Rental Property</h2>
-                    <span class="text-muted"> Namiwawa Avenue 143</span>
-                    <h4>Monthly Rate</h4>
-                    <h2 class="success">MWK100,500</h2>
-
-                    <div class="icon-box">
-                        <span>rooms
-                            <h2> 3
-                                <span class="material-icons-sharp">meeting_room</span>
-                            </h2>
-                    </div>
-
-                    <div class="button-box">
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="property-listing">
-                <div class="image-box">
-                    <img src="assets/images/house2.jpeg" alt="">
-                </div>
-                <div class="column">
-                    <h2> Legway Junior Property</h2>
-                    <span class="text-muted"> Lilongwe Area 12</span>
-                    <h4>Monthly Rate</h4>
-                    <h2 class="success">MWK200,500</h2>
-
-                    <div class="icon-box">
-                        <span>rooms
-                            <h2>
-                                5
-                                <span class="material-icons-sharp">meeting_room</span>
-                            </h2>
-                    </div>
-
-                    <div class="button-box">
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="property-listing">
-                <div class="image-box">
-                    <img src="assets/images/house3.jpg" alt="">
-                </div>
-                <div class="column">
-                    <h2> Cap Maleroe 5 House</h2>
-                    <span class="text-muted"> Lilongwe Area 43</span>
-                    <h4>Monthly Rate</h4>
-                    <h2 class="success">MWK200,000</h2>
-
-                    <div class="icon-box">
-                        <span>rooms
-                            <h2>
-                                5
-                                <span class="material-icons-sharp">meeting_room</span>
-                            </h2>
-                    </div>
-
-                    <div class="button-box">
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
+           
 
             <?php
         include 'database.php'; 

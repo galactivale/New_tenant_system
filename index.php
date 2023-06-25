@@ -50,9 +50,6 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#">Properties</a>
                     </li>
                     <li class="nav-item">
@@ -87,44 +84,63 @@
         }
         </style>
 
-        <section class="hero py-5">
-            <div class="container">
-                <h1 class="display-4 text-white">Welcome to Ktenant Management System</h1>
-                <p class="lead">Find your dream property or list your property for rent.</p>
-                <!-- Other content here -->
-
-                <!-- Custom Search Bar -->
-                <form class="search-form mt-4">
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3 text-white">
-                            <label for="city">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="Enter city">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="roomSize">Room Size</label>
-                            <input type="number" class="form-control" id="roomSize" placeholder="Enter room size">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="bathSize">Bath Size</label>
-                            <input type="number" class="form-control" id="bathSize" placeholder="Enter bath size">
+<div class="overlay-black w-100 slider-banner1 position-relative" style="background-image: url('home.jpg'); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-lg-12">
+                        <div class="text-white">
+                            <h1 class="mb-4"><span class="text-success">Let us</span><br>
+                            Guide you Home</h1><!-- FOR MORE PROJECTS visit: codeastro.com -->
+                            <form method="post" action="propertygrid.php">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-2">
+                                        <div class="form-group">
+                                            <select class="form-control" name="type">
+                                                <option value="">Select Type</option>
+												<option value="apartment">Apartment</option>
+												<option value="flat">Flat</option>
+												<option value="building">Building</option>
+												<option value="house">House</option>
+												<option value="villa">Villa</option>
+												<option value="office">Office</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-2">
+                                        <div class="form-group">
+                                            <select class="form-control" name="stype">
+                                                <option value="">Select Status</option>
+												<option value="rent">Rent</option>
+												<option value="sale">Sale</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="city" placeholder="Enter City" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-2">
+                                        <div class="form-group">
+                                            <button type="submit" name="filter" class="btn btn-success w-100">Search Property</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <button class="btn btn-light" type="submit">Search</button>
-                </form>
+                </div>
             </div>
-
-            </div>
-        </section>
+        </div>
 
         <!-- Property Listings -->
 
         <div class="col-md-12">
-    <div class="tab-content mt-4" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home">
-            <div class="row">
+            <div class="tab-content mt-4" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home">
+                    <div class="row">
 
-                <?php
+                        <?php
                 $result = mysqli_query($conn, "SELECT * FROM property");
                 if (mysqli_num_rows($result) > 0) {
                     $num = 0;
@@ -138,7 +154,7 @@
                             <div class="featured-thumb hover-zoomer mb-4">
                                 <div class="overlay-black overflow-hidden position-relative">
                                     <img src="<?php echo $row['property_image'] ? 'http://localhost/Tenant/system/landlord/photos/' . $row['property_image'] : 'http://localhost/Tenant/system/landlord/photos/default.png'; ?>"
-                                        alt="Property Image" class="card-img-top" >
+                                        alt="Property Image" class="card-img-top">
                                     <div class="featured bg-success text-white">New</div>
                                     <div class="sale bg-success text-white text-capitalize">For Rent</div>
                                     <div class="price text-light"><b><?php echo $formattedMonthly; ?></b><span
@@ -146,10 +162,12 @@
                                 </div>
                                 <div class="featured-thumb-data shadow-one">
                                     <div class="p-3">
-                                        <h5 class="text-secondary hover-text-success mb-2 text-capitalize">
+                                        <h5 class="text-black hover-text-success mb-2 text-capitalize">
                                             <?php echo $row['property_name']; ?></a></h5>
-                                        <span class="location text-capitalize"><i
-                                                class="fas fa-map-marker-alt text-success"></i>
+                                        <span class="location text-capitalize">
+                                            <span class="material-icons">
+                                                pin_drop
+                                            </span>
                                             <?php echo $row['street_address']; ?></span>
                                     </div>
                                     <div class="bg-gray quantity px-4 pt-4">
@@ -165,20 +183,20 @@
                             </div>
                         </div>
 
-                <?php
+                        <?php
                         $num++;
                     }
                 } else {
                     echo "No result found";
                 }
                 ?>
-                
+
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-       
+
 
 
         <script>

@@ -1,5 +1,11 @@
 <?php
-require_once('database.php'); 
+session_start();
+echo $_SESSION["usernamel"];
+print_r($_SESSION);
+if( !isset($_SESSION["usernamel"]) ){
+    header("Location:../../login.php");
+    exit();
+}
 include 'user_info_database.php';
 ?>
 <!DOCTYPE html>

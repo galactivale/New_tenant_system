@@ -1,6 +1,15 @@
 <?php
-include 'database.php';
+//include 'database.php';
+//header("Location: ../../login.php");
+session_start();
+if( !isset($_SESSION["username"]) ){
+    header("Location:../../login.php");
+    exit();
+}
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +37,7 @@ include 'database.php';
         <!-- end aside by Tadala Kuntambila-->
 
         <main>
-            <h1>Tenant Dashboard</h1>
+            <h1>Tenant Dashboard <?php isset($_SESSION["USER_ID"]);?></h1>
             <div class="date">
                 <?php
                 $currentDate = date('Y-m-d');

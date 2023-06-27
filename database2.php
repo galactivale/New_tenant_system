@@ -46,9 +46,4 @@
         
     }
 
-    if($isExist != true){
-        header("location:../Tenant/index.php");
-        exit();
-    }
-
 ?>

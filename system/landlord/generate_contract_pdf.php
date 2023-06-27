@@ -41,6 +41,7 @@ do {
 
 $sql = "INSERT INTO `contract` (contract_id, user_id, property_id, first_name, last_name, monthly_rent, contract_start_date, contract_end_date, contract_status) 
         VALUES ('$contractID', '$userId', '$propertyId','$firstName','$surname', '$monthlyRateValue', '$movein', '$endDate', '1')";
+         // query to select user_id 
 
 if (mysqli_query($conn, $sql)) {
     echo "Contract inserted successfully.";

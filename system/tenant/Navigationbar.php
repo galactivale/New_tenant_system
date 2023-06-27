@@ -4,6 +4,10 @@
                     <span class="material-icons-sharp">dashboard</span>
                     <h4>Dashboard</h4>
                 </a>
+                <a href="deposit_tenant.php">
+                    <span class="material-icons-sharp">paid</span>
+                    <h4>Deposit</h4>
+                </a>
                 <a href="payments_tenant.php">
                     <span class="material-icons-sharp">paid</span>
                     <h4>Payments</h4>

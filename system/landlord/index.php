@@ -169,7 +169,9 @@ if ($result && mysqli_num_rows($result) > 0) {
     </div>
     <div class="profile">
         <div class="info">
-            <p>Hey, <b>Tadala</b></p>
+            
+        <p>Hey, <b><?php echo $_SESSION["usernamel"]; ?></b></p>
+
             <small class="text-muted">Admin</small>
         </div>
         <div class="profile-photo">

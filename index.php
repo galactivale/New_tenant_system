@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="fonts/flaticon/flaticon.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="node_modules/bootstrap4-modal-fullscreen/dist/bootstrap4-modal-fullscreen.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
                 <div class="col-lg-12">
                     <div class="text-white">
                         <h1 class="mb-4"><span class="text-success">Let us</span><br>
-                            Guide you Home</h1><!-- FOR MORE PROJECTS visit: codeastro.com -->
+                            Guide you Home</h1>
                         <form method="post" action="propertygrid.php">
                             <div class="row">
                                 <div class="col-md-6 col-lg-2">
@@ -137,26 +138,28 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <button type="button" class="btn btn-dark btn-block"
-                                            onclick="showPropertyDetails(<?php echo $row['property_id']; ?>)">View
-                                            Details</button>
+
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-dark btn-block"
+                                                onclick="showPropertyDetails(<?php echo $row['property_id']; ?>)">View
+                                                Details</button>
+                                        </div>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="propertyModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="propertyModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                        <div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="propertyModalLabel">Property Details
-                                                        </h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                        <p id="propertyDetails"></p>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <!-- Property details will be displayed here -->
-                                                        <p id="propertyDetails"></p>
+                                                    <div class="modal-body d-flex">
+                                                       
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -187,26 +190,29 @@
     </div>
 
 </body>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    function showPropertyDetails(propertyId) {
-        // Perform an AJAX request to fetch the property details based on the propertyId
-        $.ajax({
-            url: 'get_property_info.php', // Replace with the path to your server-side script that fetches the property details
-            type: 'POST',
-            data: { propertyId: propertyId },
-            success: function(response) {
-                // Display the property details in the modal
-                $('#propertyDetails').html(response);
-                $('#propertyModal').modal('show');
-            },
-            error: function() {
-                // Handle error if the AJAX request fails
-                alert('Failed to fetch property details.');
-            }
-        });
-    }
-</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+function showPropertyDetails(propertyId) {
+    // Perform AJAX request to fetch property details
+    $.ajax({
+        url: 'get_property_info.php', // Replace with your server-side script URL
+        type: 'GET',
+        data: {
+            property_id: propertyId // Use the property ID passed as the parameter
+        },
+        success: function(response) {
+            // Update the modal with the property details
+            $('#propertyDetails').html(response);
+            $('#exampleModal').modal('show');
+            var tempElement;
 
-    </script>
+            var tempElement = $('<div>').html(response);
+            var monthlyRate = tempElement.find('#monthlyRateValue').val();
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr);
+        }
+    });
+}
+</script>

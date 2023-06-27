@@ -28,6 +28,20 @@
 
 
 }
+.modal-fullscreen .modal-dialog {
+  max-width: 80vh;
+  max-height: 80vh;
+  margin: 0 auto;
+}
+
+.modal-fullscreen .modal-content {
+  height: 100%;
+}
+
+.modal-fullscreen .modal-body {
+  overflow-y: auto;
+}
+
 
 .modal-confirm {
   color: #636363;
@@ -499,6 +513,19 @@
 }
   
 
+.form-container select {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  background: var(--color-light);
+  border-radius: var(--border-radius-2);
+}
+
+.form-container select:focus {
+  background-color: var(--color-white);
+  outline: none;
+}
 
 /* popup form  */
 

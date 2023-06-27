@@ -8,25 +8,54 @@ if (isset($_GET['property_id'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        // Fetch tenant info
-        $property = mysqli_fetch_assoc($result);
+      // Fetch tenant info
+      $property = mysqli_fetch_assoc($result);
 
-        $propertyInfo = ' <div class="property-details"> <h2>Property Information</h2>';
-        $propertyInfo .=  ' <div class="property-image"> <img src=http://localhost/Tenant/system/landlord/photos/'. $property['property_image'] . '> </div>'; 
-        $propertyInfo .= ' <div class="property-info"><h3><strong>Property Name:</strong> <div id="propertyName">' . $property['property_name'] . '</h3> </div>';
-        $propertyInfo .= ' <h3><strong>Property ID:</strong> <div id="propertyid">' . $property['property_id'] . '</h3> </div>';
-        $propertyInfo .= '<h3><strong>City :</strong> <div id="propertyCity">' . $property['city'] . '</h3> ';
-        $propertyInfo .= '<h3><strong>Street address:</strong> <div id="streetAddress"> ' . $property['street_address'] . '</h3> </div>';
-        $propertyInfo .= '<h3><strong>Monthly Rate:</strong> <div id="monthlyRate"> ' . $property['monthly_rate'] . '</h3> </div>';
-        $propertyInfo .= '<h3><strong>Rooms:</strong><div id="rooms"> ' . $property['rooms'] . '</h3> </div> </div>';
+      $propertyInfo = '<div class="row">';
+      $propertyInfo .= '<div class="col-md-4">';
+     $propertyInfo .= '<div class="property-image" style="height: 100%;"><img src="http://localhost/Tenant/system/landlord/photos/' . $property['property_image'] . '" style="width: 100%; height: 100%; object-fit: cover;"></div>';
+    $propertyInfo .= '</div>';
+      
+      $propertyInfo .= '<div class="col-md-4">';
+      $propertyInfo .= '<h5><strong>Property Information</strong></h5>';
+      $propertyInfo .= '<div id="propertyName">' . '<h5>'. $property['property_name'] . '</h5>' .'</div>';
+      $propertyInfo .= '<p><strong>Property ID:</strong></p>';
+      $propertyInfo .= '<div id="propertyid">' . $property['property_id'] . '</div>';
+      $propertyInfo .= '<p><strong>City:</strong></p>';
+      $propertyInfo .= '<div id="propertyCity">' . $property['city'] . '</div>';
+      $propertyInfo .= '<p><strong>Street address:</strong></p>';
+      $propertyInfo .= '<div id="streetAddress">' . $property['street_address'] . '</div>';
+      $propertyInfo .= '<p><strong>Monthly Rate:</strong></p>';
+      $propertyInfo .= '<div id="monthlyRate">' . $property['monthly_rate'] . '</div>';
+      $propertyInfo .= '</div>';
+      
+      
+      $propertyInfo .= '<div class="col-md-4">';
+      
+  
+      $propertyInfo .= '<p><strong>Rooms:</strong></p>';
+      $propertyInfo .= '<div id="rooms">' . $property['rooms'] . '</div>';
+      $propertyInfo .= '<p><strong>Square Feet:</strong></p>';
+      $propertyInfo .= '<div id="sqrfeet">' . $property['square_feet'] . '</div>';
+      $propertyInfo .= '<p><strong>Square Feet:</strong></p>';
+      $propertyInfo .= '<div id="baths">' . $property['baths'] . '</div>';
+      $propertyInfo .= '<p><strong>Kitchen:</strong></p>';
+      $propertyInfo .= '<div id="kitchen">' . $property['kitchen'] . '</div>';
+      $propertyInfo .= '<p><strong>balcony Feet:</strong></p>';
+      $propertyInfo .= '<div id="balcony">' . $property['balcony'] . '</div>';
+      $propertyInfo .= '</div>';
+      
+      $propertyInfo .= '</div>';
+      
+      $monthlyRate = $property['monthly_rate'];
+      
+      $propertyInfo .= '<input type="hidden" id="monthlyRateValue" value="' . $monthlyRate . '">';
+      
+      // Return HTML
+      echo $propertyInfo;
+      
+      
 
-        $monthlyRate = $property['monthly_rate'];
-
-        
-        $propertyInfo .= '<input type="hidden" id="monthlyRateValue" value="' . $monthlyRate . '">';
-
-        // Return HTML
-        echo $propertyInfo;
     } else {
         echo 'Tenant not found.';
     }

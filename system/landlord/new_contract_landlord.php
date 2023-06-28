@@ -26,7 +26,7 @@
             require_once 'database.php';
             $tenants = [];
 
-            $query = "SELECT * FROM users WHERE position = 0";
+            $query = "SELECT * FROM users WHERE position = 1";
             $result = mysqli_query($conn, $query);
 
             while ($row = mysqli_fetch_assoc($result)) {

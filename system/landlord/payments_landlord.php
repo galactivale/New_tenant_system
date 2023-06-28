@@ -19,7 +19,7 @@
 
         <!-- end aside by Tadala Kuntambila-->
 
-        <main>
+        <main class="main-scrollable">
             <h1>
                 <?php
                     $totalPayments = 0;
@@ -46,7 +46,7 @@
                     <span class="material-icons-sharp">receipt_long</span>
                     <div class="middle">
                         <div class="left">
-                            <h2>Invoices</h2>
+                            <h2>Payments</h2>
                             <h1>2</h1>
                         </div>
                     </div>

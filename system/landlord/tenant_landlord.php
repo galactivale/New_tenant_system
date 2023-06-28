@@ -24,13 +24,13 @@
 
 <!-- end aside by Tadala Kuntambila-->
 
-<main>
+<main class="main-scrollable">
 <h1>Tenants</h1>
 <div class="recent-orders">
  
 <?php 
 
-$sql = "SELECT COUNT(*) as total_users FROM `users` WHERE `position` = 0";
+$sql = "SELECT COUNT(*) as total_users FROM `users` WHERE `position` = 1";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
@@ -165,7 +165,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         <?php
 
 
-$sql = "SELECT * FROM `users` WHERE `position` = 0";
+$sql = "SELECT * FROM `users` WHERE `position` = 1";
 
 $result = mysqli_query($conn, $sql);
 

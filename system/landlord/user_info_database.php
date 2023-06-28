@@ -1,7 +1,8 @@
 <?php 
 include 'database.php';
-$sql = "SELECT COUNT(*) as total_users FROM `users` WHERE `position` = 0";
+$sql = "SELECT COUNT(*) as total_users FROM `users` WHERE `position` = 1";
 $result = mysqli_query($conn, $sql);
+
 
 if ($result && mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
@@ -25,4 +26,26 @@ $result = mysqli_query($conn, $sql);
 if ($result && mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
   $inactiveUsers = $row['inactive_users'];
+  
 }
+?>
+
+<?php
+$sql = "SELECT SUM(payment_amount) AS total_payment FROM payment";
+
+$result = mysqli_query($conn, $sql);
+
+
+if (mysqli_num_rows($result) > 0) {
+
+    $row = mysqli_fetch_assoc($result);
+    
+    $totalPayments = $row["total_payment"];
+    $formattedPayments = 'MWK ' . number_format((float)$totalPayments, 2, '.', ',');
+    
+
+} else {
+    echo "0";
+}
+
+?>

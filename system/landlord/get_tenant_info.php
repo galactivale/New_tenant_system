@@ -4,7 +4,7 @@ require 'database.php';
 if (isset($_GET['user_id'])) {
     $userId = $_GET['user_id'];
 
-    $query = "SELECT * FROM users WHERE user_id = $userId AND position = 0";
+    $query = "SELECT * FROM users WHERE user_id = $userId AND position = 1";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {

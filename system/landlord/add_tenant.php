@@ -28,7 +28,7 @@ if (isset($_GET['username']) && isset($_GET['email']) && isset($_GET['password']
         $isExist = true;
     }
     if ($isExist == false) {
-        mysqli_query($conn, "INSERT INTO `users` (`user_id`,`username`,`password`,`email`,`name`,`surname`,`position`) VALUES ('$tmp_id','$username','$password','$email','$name','$surname','0')");
+        mysqli_query($conn, "INSERT INTO `users` (`user_id`,`username`,`password`,`email`,`name`,`surname`,`position`) VALUES ('$tmp_id','$username','$password','$email','$name','$surname','1')");
 
         echo "Tenant registered successfully.";
         header('location:tenant_landlord.php');

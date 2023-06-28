@@ -3,6 +3,21 @@
 <?php
 
 
+    $host = 'localhost';
+$dbname = 'ktenant';
+$username = 'root';
+$password = '';
+echo "hello world";
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    // Set PDO error mode to exception
+    echo "Connected: " ;
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
+/*
 require_once 'system/landlord/vendor/autoload.php'; // Include Stripe PHP library
 
 if (isset($_POST['stripeToken'])) {
@@ -29,7 +44,7 @@ if (isset($_POST['stripeToken'])) {
     }
 }
 
-
+*/
 
 
 ?>

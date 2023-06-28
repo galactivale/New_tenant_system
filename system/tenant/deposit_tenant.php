@@ -2,6 +2,61 @@
 <html lang="en">
 
 <head>
+    <?php
+
+    $servername= "localhost";
+    $username="root";
+    $password="";
+    $dbname="ktenant"; 
+
+    $conn= mysqli_connect($servername,$username,$password,$dbname); 
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+        
+      session_start();
+      $user_id = '';
+      if( !isset($_SESSION["USER_ID"]) ){
+          $user_id = $_SESSION["USER_ID"];
+          header("Location:../../login.php");
+          exit();
+      }
+
+      if(isset($_POST['ammount'])){
+        $amount = $_POST['ammount'];
+        if(isset($_FILES['file'])){
+          echo "Hellos";
+          $id = 0;
+          while(true){
+            $id = rand(0,999999);
+            $query = mysqli_query($conn, "SELECT * FROM `cheque` WHERE `folder` = '$id'");
+            if(mysqli_num_rows($query)== 0){
+              break;
+            }
+          }
+          echo "Niga";
+          $isCreated = false;
+          if(is_dir("../content/" . $id)){
+            $isCreated= true;
+          }
+          else{
+            if(mkdir("../content/" . $id)){
+              $isCreated= true;
+            }
+          }
+          if($isCreated !=false){
+            echo "Hello";
+            $name = $_FILES['file']['name'];
+            $file = $_FILES['file']['tmp_name'];
+            move_uploaded_file($file, "../content/" . $id . "/" . $name );
+            mysqli_query($conn, "INSERT INTO `cheque`(`folder`, `name`, `user_id`) VALUE ('$id','$name','$user_id')");
+          }
+        }
+        
+      }
+
+    ?>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -116,58 +171,69 @@
         border-radius: 4px;
         cursor: pointer;
     }
+
     #stripe-modal .modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-  #stripe-modal h1 {
-    margin-bottom: 1rem;
-  }
+    #stripe-modal h1 {
+        margin-bottom: 1rem;
+    }
 
-  #stripe-modal label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
+    #stripe-modal label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
 
-  #stripe-modal #card-element {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-  }
+    #stripe-modal #card-element {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
 
-  #stripe-modal #card-errors {
-    color: red;
-    margin-top: 0.5rem;
-  }
+    #stripe-modal #card-errors {
+        color: red;
+        margin-top: 0.5rem;
+    }
 
-  #stripe-modal #amount {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-  }
+    #stripe-modal #amount {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
 
-  #stripe-modal button[type="submit"] {
-    padding: 10px 20px;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+    #stripe-modal button[type="submit"] {
+        padding: 10px 20px;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="number"] {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        outline: none;
+    }
+    </style>
+
     </style>
 </head>
 
 <div class="container">
 
-    <?php
-        include 'Navigationbar.php';
-        ?>
+
+    <?php 
+         include 'Navigationbar.php';?>
     <main>
         <h1>Please Pick A deposit Method</h1>
 
@@ -192,55 +258,58 @@
                     <div>
                     </div>
                     <div>
-                        <label for="check-image">Upload Check Image:</label>
-                        <input type="file" id="check-image" accept="image/*">
-                        <img id="check-image-preview" src="" alt="Check Image Preview"
-                            style="max-width: 90%; height: auto; margin-top: 10px; display: none;">
+                        <form action="" method="post" enctype="multipart/data">
+                            <label for="check-image">Upload Check Image:</label>
+                            <input type="file" id="check-image" accept="image/*">
+                            <input type="number" name="ammount" id="">
+                            <button class="submit-button">Submit</button>
+                            <!-- <img id="check-image-preview" src="" alt="Check Image Preview"style="max-width: 90%; height: auto; margin-top: 10px; display: none;"> -->
+                        </form>
                     </div>
 
                     <label for="check-example">Example:</label>
-                    <img id="" src="deposit.png" alt="" style="max-width: 50%; height: auto; margin-top: 10px; ">
-                    <button class="submit-button" onclick="submitDeposit()">Submit</button>
+                    <!-- <img id="" src="deposit.png" alt="" style="max-width: 100%; height: auto; margin-top: 10px; "> -->
+                    <!-- <button class="submit-button" onclick="submitDeposit()">Submit</button> -->
 
                 </div>
 
             </div>
 </div>
 <div id="stripe-modal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeModal('stripe')">&times;</span>
-    <form action="stripe.php" method="POST" id="payment-form">
-      <h1>Stripe Card Payment</h1>
-      <div>
-        <label for="card-element">
-          Credit or debit card
-        </label>
-        <div id="card-element">
-          <!-- A Stripe Element will be inserted here. -->
-        </div>
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('stripe')">&times;</span>
+        <form action="stripe.php" method="POST" id="payment-form">
+            <h1>Stripe Card Payment</h1>
+            <div>
+                <img id="" src="card.png" alt="" style="max-width: 100%; height: auto; margin-top: 10px; ">
+                <label for="card-element">
+                    Credit or debit card
+                </label>
+                <div id="card-element">
+                    <!-- A Stripe Element will be inserted here. -->
+                </div>
 
-        <!-- Used to display form errors. -->
-        <div id="card-errors" role="alert"></div>
-      </div>
+                <!-- Used to display form errors. -->
+                <div id="card-errors" role="alert"></div>
+            </div>
 
-      <div>
-        <label for="amount">Add Amount:</label>
-        <input type="number" id="amount" name="amount" step="0.01" min="0" required>
-      </div>
+            <div>
+                <label for="amount">Add Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" min="0" required>
+            </div>
 
-      <button type="submit">Pay</button>
-    </form>
-  </div>
+            <button type="submit">Pay</button>
+        </form>
+    </div>
 </div>
 
-<!-- Stripe Success Modal -->
 <div id="success-modal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeModal('success')">&times;</span>
-    <h2>Payment Successful!</h2>
-    <p>Thank you for your payment.</p>
-  </div>
-</div> 
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('success')">&times;</span>
+        <h2>Payment Successful!</h2>
+        <p>Thank you for your payment.</p>
+    </div>
+</div>
 
 </main>
 
@@ -264,7 +333,7 @@ checkImageInput.addEventListener('change', function() {
 });
 </script>
 <script>
-    function openModal(paymentType) {
+function openModal(paymentType) {
     const modal = document.getElementById(`${paymentType}-modal`);
     modal.classList.add('show-modal');
 }
@@ -286,57 +355,54 @@ function navigateToPayment(paymentType) {
 function openSuccessModal() {
     openModal('success');
 }
-
 </script>
 <script>
-    // Set your Stripe publishable key
-    var stripe = Stripe('pk_test_scMohyFxHpovb9BDkm21uvXa');
+// Set your Stripe publishable key
+var stripe = Stripe('pk_test_scMohyFxHpovb9BDkm21uvXa');
 
-    // Create an instance of Elements
-    var elements = stripe.elements();
+// Create an instance of Elements
+var elements = stripe.elements();
 
-    // Create a card Element and mount it to the card-element div
-    var card = elements.create('card');
-    card.mount('#card-element');
+// Create a card Element and mount it to the card-element div
+var card = elements.create('card');
+card.mount('#card-element');
 
-    // Handle real-time validation errors from the card Element
-    card.addEventListener('change', function(event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
+
+card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
         displayError.textContent = event.error.message;
-      } else {
+    } else {
         displayError.textContent = '';
-      }
-    });
-
-    // Handle the form submission
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          // Send the token to your server
-          stripeTokenHandler(result.token);
-        }
-      });
-    });
-
-    // Submit the form with the token ID
-    function stripeTokenHandler(token) {
-      var form = document.getElementById('payment-form');
-      var hiddenInput = document.createElement('input');
-      hiddenInput.setAttribute('type', 'hidden');
-      hiddenInput.setAttribute('name', 'stripeToken');
-      hiddenInput.setAttribute('value', token.id);
-      form.appendChild(hiddenInput);
-      form.submit();
     }
-  </script>
+});
+
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function(result) {
+        if (result.error) {
+            // Inform the user if there was an error
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            // Send the token to your server
+            stripeTokenHandler(result.token);
+        }
+    });
+});
+
+function stripeTokenHandler(token) {
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+    form.submit();
+}
+</script>
 
 </body>
 

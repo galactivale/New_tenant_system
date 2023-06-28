@@ -2,7 +2,15 @@
 //include 'database.php';
 //header("Location: ../../login.php");
 session_start();
-if( !isset($_SESSION["username"]) ){
+if (isset($_SESSION["USER_ID"])) {
+    $user_id = $_SESSION["USER_ID"];
+    // Access the user ID as needed
+    echo "USER_ID: " . $user_id;
+} else {
+    echo "USER_ID is not set in the session.";
+}
+if( !isset($_SESSION["USER_ID"]) ){
+  
     header("Location:../../login.php");
     exit();
 }
@@ -53,7 +61,39 @@ if( !isset($_SESSION["username"]) ){
                     <div class="middle">
                         <div class="left">
                             <h3>Amount Remaining </h3>
-                            <h1>MWK450,111.00</h1>
+                            <h1> <?php
+                            // DATABASE
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $dbname = "ktenant";
+
+                            $conn = mysqli_connect($servername, $username, $password, $dbname);
+                            if (!$conn) {
+                                die("Connection failed: " . mysqli_connect_error());
+                            }
+
+                            $sql = "SELECT contract.contract_id, contract.user_id, monthly_rent, (monthly_rent - IFNULL(SUM(payment_amount), 0)) AS amount_remaining
+                                    FROM contract
+                                    LEFT JOIN payment ON contract.contract_id = payment.contract_id
+                                    WHERE contract.user_id = '$user_id'
+                                    GROUP BY contract.contract_id";
+
+                            $result = mysqli_query($conn, $sql);
+
+                            
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                                $amountRemaining = $row['amount_remaining'];
+                                if ($amountRemaining > 0) {
+                                    echo '<h1>MWK' . $amountRemaining . '</h1>';
+                                } else {
+                                    echo '<h1>0</h1>';
+                                }
+                            } else {
+                                echo '<h1>0</h1>';
+                            }
+                            ?></h1>
                         </div>
 
 
@@ -64,7 +104,23 @@ if( !isset($_SESSION["username"]) ){
                     <div class="middle">
                         <div class="left">
                             <h3>Amount Paid</h3>
-                            <h1>MWK0</h1>
+                            <h1><?php
+                                // DATABASE
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $dbname = "ktenant";
+
+                                $conn = mysqli_connect($servername, $username, $password, $dbname);
+                                if (!$conn) {
+                                    die("Connection failed: " . mysqli_connect_error());
+                                }
+
+                                $sql = "SELECT SUM(payment_amount) AS total_paid FROM payment    WHERE user_id = '$user_id'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                echo "MWK" . $row['total_paid'];
+                                ?></h1>
                         </div>
 
                     </div>
@@ -84,70 +140,70 @@ if( !isset($_SESSION["username"]) ){
 
                 </div>
 
-
-
-                <script async src="https://js.stripe.com/v3/buy-button.js">
-
-                    <script async
-                        src="https://js.stripe.com/v3/buy-button.js">
-                </script>
-
-                <stripe-buy-button buy-button-id="buy_btn_1NE4duI0x23BUHNJBp84RZo4"
-                    publishable-key="pk_test_scMohyFxHpovb9BDkm21uvXa">
-                </stripe-buy-button>
-
             </div>
 
             <!--End of insghts lol-->
             <div class="recent-orders">
 
-                
+
                 <h2> Recent Payments</h2>
 
 
-                <table>
+                <?php
 
-                    <tbody>
-                        <?php
-                        // Execute the SQL query
-                        $sql = "SELECT p.payment_id, u.name, u.surname, p.payment_amount, p.payment_date
-        FROM payment p
-        JOIN contract c ON p.contract_id = c.contract_id
-        JOIN users u ON c.user_id = u.user_id";
+// DATABASE
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ktenant";
 
-                        $result = mysqli_query($conn, $sql);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
-                        // Check if any rows are returned
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            // Output table headers
-                            echo '<table>
+// Check if user is logged in
+if (!isset($_SESSION["USER_ID"])) {
+    // User is not logged in, redirect to login page
+    header("location: login.php");
+    exit();
+}
+
+
+$userID = $_SESSION["USER_ID"];
+
+$sql = "SELECT * FROM `payment` WHERE `user_id` = '$userID'";
+
+$result = mysqli_query($conn, $sql);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    // Output table headers
+    echo '<table>
             <tr>
                 <th>Payment ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
                 <th>Amount</th>
+                <th> Payment Type </th>
                 <th>Date</th>
             </tr>';
 
-                            // Iterate over the result set and output table rows
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<tr>';
-                                echo '<td>' . $row['payment_id'] . '</td>';
-                                echo '<td>' . $row['first_name'] . '</td>';
-                                echo '<td>' . $row['last_name'] . '</td>';
-                                echo '<td>' . $row['payment_amount'] . '</td>';
-                                echo '<td>' . $row['payment_date'] . '</td>';
-                                echo '</tr>';
-                            }
+    // Iterate over the result set and output table rows
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<tr>';
+        echo '<td>' . $row['payment_id'] . '</td>';
+        echo '<td>' . $row['payment_amount'] . '</td>';
+        echo '<td>' . $row['payment_type'] . '</td>';
+        echo '<td>' . $row['payment_date'] . '</td>';
+        echo '</tr>';
+    }
 
-                            // Close the table
-                            echo '</table>';
-                        } else {
-                            echo 'No payment records found.';
-                        }
-                        ?>
+    // Close the table
+    echo '</table>';
+} else {
+    echo 'No payment records found.';
+}
 
-                </table>
+?>
+
 
         </main>
         <!--Endo main-->
@@ -184,12 +240,12 @@ if( !isset($_SESSION["username"]) ){
                             <small class="text-muted"></small>
                         </div>
                     </div>
-        </div>
+                </div>
 
 
 
-        </div>
-        <script src="js/index.js"></script>
+            </div>
+            <script src="js/index.js"></script>
 </body>
 
 

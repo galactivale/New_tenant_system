@@ -1,12 +1,6 @@
 <?php
-session_start();
-echo $_SESSION["usernamel"];
-print_r($_SESSION);
-if( !isset($_SESSION["usernamel"]) ){
-    header("Location:../../login.php");
-    exit();
-}
-include 'user_info_database.php';
+    include 'user_info_database.php';
+    require_once('database.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +29,7 @@ include 'Navigationbar.php';
 
 <!-- end aside by Tadala Kuntambila-->
 
-<main>
+<main class="main-scrollable">
     <h1>Landlord Dashboard</h1>
     <div class="date">
         <?php
@@ -52,7 +46,7 @@ include 'Navigationbar.php';
             <div class="middle">
                 <div class="left">
                     <h3>Total Payments</h3>
-                    <h1>MWK685,000</h1>
+                    <h1> <?php echo $formattedPayments ?> </h1>
                 </div>
                 <div class="progress">
                     <svg>
@@ -125,7 +119,7 @@ include 'Navigationbar.php';
         <?php
 
 
-$sql = "SELECT * FROM `users` WHERE `position` = 0";
+$sql = "SELECT * FROM `users` WHERE `position` = 1";
 
 $result = mysqli_query($conn, $sql);
 
@@ -170,7 +164,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <div class="profile">
         <div class="info">
             
-        <p>Hey, <b><?php echo $_SESSION["usernamel"]; ?></b></p>
+        <p>Hey, <b><?php echo $_SESSION["USER_ID"]; ?></b></p>
 
             <small class="text-muted">Admin</small>
         </div>

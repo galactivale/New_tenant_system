@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the query
         if ($conn->query($query) === TRUE) {
             // Payment record successfully added
-            echo "Payment record added successfully.";
+            header("Location:payments_landlord.php");
         } else {
             // Error occurred while adding the payment record
             echo "Failed to add payment record: " . $conn->error;

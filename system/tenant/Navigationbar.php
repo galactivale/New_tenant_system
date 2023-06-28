@@ -6,10 +6,6 @@
                 </a>
                 <a href="deposit_tenant.php">
                     <span class="material-icons-sharp">paid</span>
-                    <h4>Deposit</h4>
-                </a>
-                <a href="payments_tenant.php">
-                    <span class="material-icons-sharp">paid</span>
                     <h4>Payments</h4>
                 </a>
                 <a class="" href="contract_landlord.php">

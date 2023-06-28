@@ -35,7 +35,7 @@
 
         if($isExist != false){
             if($auth_password == $password){
-                if($auth_position == 0){
+                if($auth_position == 1){
                     $isExist = false;
                 }
             }

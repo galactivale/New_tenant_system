@@ -44,10 +44,6 @@ include 'Navigationbar.php';
     
 <div class="recent-orders">
   <h2>Contract Details</h2>
-  <div class="file-viewer">
-        <iframe src="contract/tenant_contract_Maya_ Sangala_5056ieFP.pdf" frameborder="0"></iframe>
-    </div>
-  
     
 </div>
 </main>

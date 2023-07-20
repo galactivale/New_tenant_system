@@ -3,7 +3,6 @@
 
 <head>
     <?php
-
     $servername= "localhost";
     $username="root";
     $password="";
@@ -53,7 +52,6 @@
             mysqli_query($conn, "INSERT INTO `cheque`(`folder`, `name`, `user_id`) VALUE ('$id','$name','$user_id')");
           }
         }
-        
       }
 
     ?>
@@ -265,10 +263,10 @@
                             <button class="submit-button">Submit</button>
                             <!-- <img id="check-image-preview" src="" alt="Check Image Preview"style="max-width: 90%; height: auto; margin-top: 10px; display: none;"> -->
                         </form>
-                    </div>
+                    </div>  
 
                     <label for="check-example">Example:</label>
-                    <!-- <img id="" src="deposit.png" alt="" style="max-width: 100%; height: auto; margin-top: 10px; "> -->
+                    <img id="" src="deposit.png" alt="" style="max-width: 100%; height: auto; margin-top: 10px; ">
                     <!-- <button class="submit-button" onclick="submitDeposit()">Submit</button> -->
 
                 </div>
@@ -286,10 +284,7 @@
                     Credit or debit card
                 </label>
                 <div id="card-element">
-                    <!-- A Stripe Element will be inserted here. -->
                 </div>
-
-                <!-- Used to display form errors. -->
                 <div id="card-errors" role="alert"></div>
             </div>
 
@@ -344,26 +339,22 @@ function closeModal(paymentType) {
 }
 
 function navigateToPayment(paymentType) {
-    // Add your navigation code here
+
     console.log(`Clicked on ${paymentType}`);
 
-    // Open the corresponding modal
     openModal(paymentType);
 }
 
-// Function to open the success modal
 function openSuccessModal() {
     openModal('success');
 }
 </script>
 <script>
-// Set your Stripe publishable key
+
 var stripe = Stripe('pk_test_scMohyFxHpovb9BDkm21uvXa');
 
-// Create an instance of Elements
 var elements = stripe.elements();
 
-// Create a card Element and mount it to the card-element div
 var card = elements.create('card');
 card.mount('#card-element');
 

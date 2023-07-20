@@ -1,9 +1,5 @@
 <?php
 
-    // PHP Content
-
-    // Database Connection
-
     $servername= "localhost";
     $username="root";
     $password="";
@@ -23,6 +19,7 @@
     if((isset($_SESSION["TENANT_ID"]) && $_SESSION["TENANT_ID"] != "") && (isset($_SESSION["TENANT_PASSWORD"]) && $_SESSION["TENANT_PASSWORD"] != "")){
         $auth_ID = $_SESSION["TENANT_ID"];
         $password = $_SESSION["TENANT_PASSWORD"];
+        
 
         $isExist = false;
         $auth_password = ""; $auth_position = 0;

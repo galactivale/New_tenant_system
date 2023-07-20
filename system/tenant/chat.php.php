@@ -4,7 +4,7 @@
 session_start();
 if (isset($_SESSION["USER_ID"])) {
     $user_id = $_SESSION["USER_ID"];
-    // Access the user ID as needed
+
     echo "USER_ID: " . $user_id;
 } else {
     echo "USER_ID is not set in the session.";
@@ -63,16 +63,12 @@ if( !isset($_SESSION["USER_ID"]) ){
 </head>
 
 <body>
-
     <div class="container">
         <?php
         include 'Navigationbar.php';
         ?>
         </aside>
-
-
         <!-- end aside by Tadala Kuntambila-->
-
         <main>
             <h1>Tenant Dashboard <?php isset($_SESSION["USER_ID"]);?></h1>
             
@@ -89,7 +85,6 @@ if( !isset($_SESSION["USER_ID"]) ){
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
-            // Display all chat messages
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div class="chat-message">';

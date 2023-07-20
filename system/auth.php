@@ -50,8 +50,27 @@ if (isset($_GET['username']) && isset($_GET['email']) && isset($_GET['password']
     }
     if ($isExist == false) {
         mysqli_query($conn, "INSERT INTO `users` (`user_id`,`username`,`password`,`email`,`name`,`surname`,`position`) VALUES ('$tmp_id','$username','$password','$email','$name','$surname','1')");
+
         $_SESSION["USER_ID"] = $tmp_id;
-        $_SESSION["USER_PASSWORD"] = $password;
+
+        $getUserUniqueIDQuery = "SELECT unique_id FROM users WHERE user_id = ?";
+        $getUserUniqueIDStmt = $conn->prepare($getUserUniqueIDQuery);
+        $getUserUniqueIDStmt->bind_param('i', $tmp_id);
+        $getUserUniqueIDStmt->execute();
+        $getUserUniqueIDResult = $getUserUniqueIDStmt->get_result();
+
+        if ($getUserUniqueIDResult->num_rows === 0) {
+            echo "User ID not found in the users table.";
+            exit();
+        }
+
+        
+
+        $userData = $getUserUniqueIDResult->fetch_assoc();
+        $unique_id = $userData['unique_id'];
+
+        $_SESSION["UNIQUE_ID"] = $unique_id;
+
         header("location:landlord/index.php");
         exit();
     }
@@ -63,10 +82,8 @@ if (isset($_GET['username']) && isset($_GET['email']) && isset($_GET['password']
 // Login
 if (isset($_GET['username']) && $_GET['username'] != "" && isset($_GET['password']) && $_GET['password'] != "") {
     $username = $_GET['username'];
-    echo $username;
 
     $password = $_GET['password'];
-    echo $password;
 
     $isExist = false;
     $auth_password = "";
@@ -77,33 +94,30 @@ if (isset($_GET['username']) && $_GET['username'] != "" && isset($_GET['password
         $auth_password = $result['password'];
         $auth_position = $result['position'];
         $auth_ID = $result['user_id'];
-        echo $auth_ID;
+        $unique_id = $result['unique_id']; // Fetch the unique_id from the users table
         $isExist = true;
     }
-    var_dump($isExist);
-    var_dump($auth_password);
-    var_dump($auth_ID);
-    var_dump($auth_position);
 
     if ($isExist) {
         if ($auth_password == $password) {
+            // Store both USER_ID and UNIQUE_ID in the session
+            $_SESSION["USER_ID"] = $auth_ID;
+            $_SESSION["UNIQUE_ID"] = $unique_id;
+
             if ($auth_position != 1) {
-                $_SESSION["USER_ID"] = $auth_ID;
-                $_SESSION["USER_PASSWORD"] = $password;
                 header("location:landlord/index.php");
                 exit();
             } else {
-                $_SESSION["USER_ID"] = $auth_ID;
-                $_SESSION["USER_PASSWORD"] = $password;
                 header("location:tenant/index.php");
                 exit();
             }
         }
     }
 
-    echo "USER SESSION".$_SESSION["USER_ID"];
     header("location: ..//login.php");
     exit();
 }
+
+// ...
 
 ?>

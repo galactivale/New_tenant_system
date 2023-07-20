@@ -92,25 +92,7 @@
                 <input type="date" id="endDate" name="endDate">
             </div>
                  
-            <div class="recent-orders">
-            <h1>Stripe Card Payment</h1>
-
-<form action="stripe.php" method="POST" id="payment-form">
-  <div>
-    <label for="card-element">
-      Credit or debit card
-    </label>
-    <div id="card-element">
-      <!-- A Stripe Element will be inserted here. -->
-    </div>
-
-    <!-- Used to display form errors. -->
-    <div id="card-errors" role="alert"></div>
-  </div>
-
-  <button type="submit">Pay</button>
-</form>
-            </div>
+      
           
 
             <div class="recent-orders">

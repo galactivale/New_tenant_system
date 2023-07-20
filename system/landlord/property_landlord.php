@@ -184,9 +184,7 @@
         <!--End of Top-->
         <div class="recent-updates">
             <h2>Recent Messages</h2>
-            <?php 
-            include 'recent_messages.php'
-            ?>
+            <?php  include 'recent_updates.php' ?>
         </div>
 
 

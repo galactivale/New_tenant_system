@@ -1,10 +1,10 @@
 <?php
-//include 'database.php';
-//header("Location: ../../login.php");
 session_start();
 if (isset($_SESSION["USER_ID"])) {
     $user_id = $_SESSION["USER_ID"];
-    // Access the user ID as needed
+     $user_unique_id = $_SESSION["UNIQUE_ID"];
+     
+    echo "UNIQUE_ID:" . $user_unique_id; 
     echo "USER_ID: " . $user_id;
 } else {
     echo "USER_ID is not set in the session.";
@@ -105,7 +105,7 @@ if( !isset($_SESSION["USER_ID"]) ){
                         <div class="left">
                             <h3>Amount Paid</h3>
                             <h1><?php
-                                // DATABASE
+                        
                                 $servername = "localhost";
                                 $username = "root";
                                 $password = "";
@@ -133,7 +133,7 @@ if( !isset($_SESSION["USER_ID"]) ){
                     <div class="middle">
                         <div class="left">
                             <h3>Inquires</h3>
-                            <h1>0</h1>
+                            <h1>1</h1>
                         </div>
 
                     </div>
@@ -151,7 +151,7 @@ if( !isset($_SESSION["USER_ID"]) ){
 
                 <?php
 
-// DATABASE
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -162,9 +162,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Check if user is logged in
 if (!isset($_SESSION["USER_ID"])) {
-    // User is not logged in, redirect to login page
+
     header("location: login.php");
     exit();
 }
@@ -219,12 +218,10 @@ if ($result && mysqli_num_rows($result) > 0) {
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey, <b>Tadala</b></p>
-                        <small class="text-muted">Admin</small>
+                    
+                        <small class="text-muted">Tenant</small>
                     </div>
-                    <div class="profile-photo">
-                        <img src="assets/images/tadala.jpeg" alt="">
-                    </div>
+                   
                 </div>
             </div>
             <!--End of Top-->
@@ -233,14 +230,15 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="../landlord/assets/images/girl.jpeg" alt="">
+                            <img src="../landlord\assets\images/tadala.jpeg" alt="">
                         </div>
                         <div class="message">
-                            <p> <b>Maya Sangala</b> The Gyser has been fixed</p>
+                            <p> <b>Tadala </b> The Gyser has been fixed</p>
                             <small class="text-muted"></small>
                         </div>
                     </div>
                 </div>
+                
 
 
 

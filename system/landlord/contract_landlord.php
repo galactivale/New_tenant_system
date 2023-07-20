@@ -57,7 +57,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <div class="middle">
                 <div class="left">
                     <h2>Active</h2>
-                    <h1>1</h1>
+                    <h1>7</h1>
                 </div>
                 </div>
         </div>
@@ -78,7 +78,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         <span class="material-icons-sharp">inventory_2  </span>
             <div class="middle">
                 <div class="left">
-                    <h2>Archived</h2>
+                    <h2>Archive</h2>
                     <h1>0</h1>
                 </div>
                 
@@ -95,7 +95,7 @@ if ($result && mysqli_num_rows($result) > 0) {
       </form>
     </div>
     <button onclick="openAddContractURL()" class="add-property-button">Add Contract</button>
-    <button class="add-property-button" onclick="openExternalURL()">Manage Contract</button>
+
   </div>
   
     <div class="form-popup" id="myForm">
@@ -140,7 +140,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <th> Start Date</th>
                 <th> End Date</th>
                 <th> Status</th>
-                <th>edit</th>
+
 
             </tr>
         </thead>
@@ -205,9 +205,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 <!--End of Top-->
 <div class="recent-updates">
     <h2>Recent Messages</h2>
-    <?php 
-            include 'recent_messages.php'
-            ?>
+    <?php  include 'recent_updates.php' ?>
 </div>
 
 <script src="js/index.js"></script>

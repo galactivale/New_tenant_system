@@ -14,8 +14,6 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Authentication
-
     if(!isset($_SESSION)){
         session_start();
     }

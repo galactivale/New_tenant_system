@@ -11,7 +11,7 @@
       <li><a href="#">Services</a></li>
       <li><a href="#">Contact</a></li>
       <li class="right"><a href="#">Dashboard</a></li>
-      <li class="right"><a href="#">Login</a></li>
+      <li class="right"><a href="login.php">Login</a></li>
       <li class="right"><a href="#">Register</a></li>
     </ul>
   </nav>

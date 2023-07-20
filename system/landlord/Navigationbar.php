@@ -20,12 +20,8 @@
                     <span class="material-icons-sharp">assignment</span>
                     <h4>Contracts</h4>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">chat</span>
-                    <h4>Inquires</h4>
-                    <span class="message-count">0</span>
-                </a>
-                <a href="#">
+            
+                <a href="report_landlord.php">
                     <span class="material-icons-sharp">subject</span>
                     <h4>Reports</h4>
                 </a>

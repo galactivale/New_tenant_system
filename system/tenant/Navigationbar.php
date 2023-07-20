@@ -12,10 +12,10 @@
                     <span class="material-icons-sharp">assignment</span>
                     <h4>Contract</h4>
                 </a>
-                <a href="#">
+                <a href="inquires.php">
                     <span class="material-icons-sharp">chat</span>
                     <h4>Inquires</h4>
-                    <span class="message-count">0</span>
+                    <span class="message-count">1</span>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">subject</span>

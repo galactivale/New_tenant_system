@@ -47,29 +47,30 @@
                     <div class="middle">
                         <div class="left">
                             <h2>Payments</h2>
-                            <h1>2</h1>
+                            <h1>5</h1>
                         </div>
                     </div>
                 </div>
                 <div class="paid">
-                    <span class="material-icons-sharp">check_circle</span>
+                    <span class="material-icons-sharp">payments</span>
                     <div class="middle">
                         <div class="left">
-                            <h2>paid</h2>
-                            <h1>2</h1>
+                            <h2>Cash</h2>
+                            <h1>4</h1>
                         </div>
                     </div>
                 </div>
                 <div class="unpaid">
-                    <span class="material-icons-sharp">pending</span>
+                    <span class="material-icons-sharp">credit_card</span>
                     <div class="middle">
                         <div class="left">
-                            <h2>unpaid</h2>
+                            <h2>Card</h2>
                             <h1>1</h1>
                         </div>
                     </div>
                 </div>
                 <button onclick="openForm()" id="invoice-button">Add Record</button>
+                <button onclick="" id="invoice-button">Void Payment</button>
             </div>
 
             <?php
@@ -172,7 +173,7 @@
 
             <div class="recent-updates">
                 <h2>Recent Messages</h2>
-                <?php include 'recent_messages.php'; ?>
+                <?php  include 'recent_updates.php' ?>
             </div>
 
             <script src="js/index.js"></script>

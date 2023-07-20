@@ -37,56 +37,15 @@
         ?>
 
     <!-- Navbar -->
-
-
     <div class="overlay-black w-100 slider-banner1 position-relative" style="background-image: url('home.jpg');">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-lg-12">
                     <div class="text-white">
-                        <h1 class="mb-4"><span class="text-success">Let us</span><br>
-                            Guide you Home</h1>
-                        <form method="post" action="propertygrid.php">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-2">
-                                    <div class="form-group">
-                                        <select class="form-control" name="type">
-                                            <option value="">Select Type</option>
-                                            <option value="apartment">Apartment</option>
-                                            <option value="flat">Flat</option>
-                                            <option value="building">Building</option>
-                                            <option value="house">House</option>
-                                            <option value="villa">Villa</option>
-                                            <option value="office">Office</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-2">
-                                    <div class="form-group">
-                                        <select class="form-control" name="stype">
-                                            <option value="">Select Status</option>
-                                            <option value="rent">Rent</option>
-                                            <option value="sale">Sale</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="city" placeholder="Enter City"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-2">
-                                    <div class="form-group">
-                                        <button type="submit" name="filter" class="btn btn-dark w-100">Search
-                                            Property</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                        <h1 class="mb-4"><span class="text-white">Join us</span><br>
+                            Ktenant Management system</h1>
+</div>
+</div>
         </div>
     </div>
 
@@ -139,11 +98,7 @@
                                 <div class="row">
                                     <div class="col">
 
-                                        <div class="col-md-4">
-                                            <button type="button" class="btn btn-dark btn-block"
-                                                onclick="showPropertyDetails(<?php echo $row['property_id']; ?>)">View
-                                                Details</button>
-                                        </div>
+                                    
 
                                         <!-- Modal -->
                                         <div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1"

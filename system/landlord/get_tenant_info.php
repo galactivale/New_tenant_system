@@ -8,13 +8,13 @@ if (isset($_GET['user_id'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        // Fetch user info
+
         $user = mysqli_fetch_assoc($result);
 
         $imageURL = $user['user_img'];
         $baseURL = 'http://localhost/Tenant/system/landlord/photos/';
 
-        // Check if image URL is null or empty
+
         if (empty($imageURL)) {
             $imageURL = 'default_person.jpg';
         }

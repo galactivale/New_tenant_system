@@ -2,6 +2,14 @@
 use Mpdf\Mpdf;
 require_once 'vendor/autoload.php';
 require 'database.php';
+if (!isset($_SESSION['USER_ID'])) {
+    echo "User ID not found in session.";
+    exit();
+}
+
+// Retrieve the user_id from the session
+$landlordId = $_SESSION['USER_ID'];
+
 
 // Function to generate a random contract ID
 function generateContractID($length = 5) {
@@ -33,15 +41,23 @@ $endDate = $_POST['endDate'] ?? '';
 $formattedMonthly = 'MWK ' . number_format((float)$monthlyRateValue, 2, '.', ',');
 $formattedDeposit = 'MWK ' . number_format((float)$deposit, 2, '.', ',');
 
+// Check if the contract already exists
+$existingContractQuery = "SELECT * FROM `contract` WHERE user_id = '$userId'";
+$existingContractResult = mysqli_query($conn, $existingContractQuery);
+if (mysqli_num_rows($existingContractResult) > 0) {
+    echo "Contract already exists for this user.";
+    exit();
+}
+
 do {
     $contractID = generateContractID();
     $checkQuery = "SELECT * FROM `contract` WHERE contract_id = '$contractID'";
     $checkResult = mysqli_query($conn, $checkQuery);
 } while (mysqli_num_rows($checkResult) > 0);
 
-$sql = "INSERT INTO `contract` (contract_id, user_id, property_id, first_name, last_name, monthly_rent, contract_start_date, contract_end_date, contract_status) 
-        VALUES ('$contractID', '$userId', '$propertyId','$firstName','$surname', '$monthlyRateValue', '$movein', '$endDate', '1')";
-         // query to select user_id 
+$sql = "INSERT INTO `contract` (contract_id, landlord_id, user_id, property_id, first_name, last_name, monthly_rent, contract_start_date, contract_end_date, contract_status) 
+        VALUES ('$contractID','$landlordId', '$userId', '$propertyId','$firstName','$surname', '$monthlyRateValue', '$movein', '$endDate', '1')";
+     
 
 if (mysqli_query($conn, $sql)) {
     echo "Contract inserted successfully.";
@@ -51,7 +67,6 @@ if (mysqli_query($conn, $sql)) {
 
 mysqli_close($conn);
 
-// Generate content
 $contractContent = <<<EOD
 <h1>RESIDENTIAL HOUSE LEASE AGREEMENT</h1>
 <p>This agreement is made between the landlord and the tenant as follows:</p>

@@ -8,7 +8,7 @@ if (isset($_GET['property_id'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        // Fetch tenant info
+       
         $property = mysqli_fetch_assoc($result);
 
         $propertyInfo = ' <div class="property-details"> <h2>Property Information</h2>';
@@ -25,7 +25,7 @@ if (isset($_GET['property_id'])) {
         
         $propertyInfo .= '<input type="hidden" id="monthlyRateValue" value="' . $monthlyRate . '">';
 
-        // Return HTML
+
         echo $propertyInfo;
     } else {
         echo 'Tenant not found.';

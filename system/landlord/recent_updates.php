@@ -1,11 +1,10 @@
-
-                <div class="updates">
+<div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="assets/images/girl.jpg" alt="">
+                            <img src="assets/images/simeon.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p> <b>Tadala Holla</b> My heater has been broken for two days . plz help</p>
+                            <p> <b>Simeon K</b> My heater has been broken for two days . plz help</p>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -13,10 +12,10 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="assets/images/girl2.jpeg" alt="">
+                            <img src="assets/images/tamanda.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p> <b>Isac Chipofya</b> Hey, Fix tap?</p>
+                            <p> <b>Tamanda </b> Hey, can you come and fix the door?</p>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -24,10 +23,10 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="assets/images/guy4.jpeg" alt="">
+                            <img src="assets/images/manzy.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p> <b>Eric Mwale</b> You got an extra set of keys? My dog locked me out agan..</p>
+                            <p> <b>Emmanual Kyumba</b> Can I get a spare key?</p>
                             <small class="text-muted"></small>
                         </div>
                     </div>
@@ -35,10 +34,10 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="assets/images/guy.jpeg" alt="">
+                            <img src="assets/images/amo.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p> <b>Peter son</b> Please extend my lease</p>
+                            <p> <b>Amo Mokwena</b> I Just paid MWK50,000 cash </p>
                             <small class="text-muted"></small>
                         </div>
                     </div>
